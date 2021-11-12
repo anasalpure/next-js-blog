@@ -1,8 +1,8 @@
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default function Pagination({ totalPages, currentPage }) {
-  const prevPage = parseInt(currentPage) - 1 > 0
-  const nextPage = parseInt(currentPage) + 1 <= parseInt(totalPages)
+  const prevPage = parseInt(currentPage) - 1 > 0;
+  const nextPage = parseInt(currentPage) + 1 <= parseInt(totalPages);
 
   return (
     <div>

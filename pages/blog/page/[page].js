@@ -1,16 +1,14 @@
-import Head from 'next/head'
-import Link from 'next/link'
 import { fetchAPI } from '../../../lib/api';
-import styles from '../../../styles/Blog.module.css'
-import Card from '../../../components/Card'
-import Footer from '../../../components/Footer'
-import SEO from '../../../components/SEO'
-import Pagination from '../../../components/Pagination'
+import styles from '../../../styles/Blog.module.css';
+import Card from '../../../components/Card';
+import Footer from '../../../components/Footer';
+import SEO from '../../../components/SEO';
+import Pagination from '../../../components/Pagination';
 import { useRouter } from 'next/router';
 
 export default function Blog({posts,pagination}) {
-	const router = useRouter()
-  const curPage = parseInt(router.query.page || 0)
+  const router = useRouter();
+  const curPage = parseInt(router.query.page || 0);
 
 
   
@@ -18,7 +16,7 @@ export default function Blog({posts,pagination}) {
     <div className="container">
 
       <SEO
-        title="Blog"
+        title={`Blog | page ${curPage}`}
         description="main blog page"
         ogImage=""
         ogType="website"
@@ -48,7 +46,7 @@ export default function Blog({posts,pagination}) {
       <Footer/>
 
     </div>
-  )
+  );
 }
 
 export async function getStaticPaths() {
@@ -57,31 +55,31 @@ export async function getStaticPaths() {
   
   const paths = Array.from({ length: totalPages }, (_, i) => ({
     params: { page: (i).toString() },
-  }))
+  }));
 
   return {
     paths,
     fallback: 'blocking',
-  }
+  };
 }
 
 export async function getStaticProps({params}) {
   const page = parseInt(params ? params.page : 0);
 
   const [posts] = await Promise.all([
-    fetchAPI(`/article/scopes/lat/get/${page}`),
-  ])
+    fetchAPI(`/article/scopes/lat/get/${page}`)
+  ]);
 
   const pagination = {
     currentPage: page,
-    totalPages: 10,
-  }
+    totalPages: 10
+  };
 
   return {
     props: {
-     posts,
-     pagination
+      posts,
+      pagination
     },
-    revalidate: 180,
-  }
+    revalidate: 180
+  };
 }

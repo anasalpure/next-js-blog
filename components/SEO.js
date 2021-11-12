@@ -1,8 +1,8 @@
-import Head from 'next/head'
-import { useRouter } from 'next/router'
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 export default function SEO({ title, description, ogType, ogImage, twImage }) {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <Head>
       <title>{title}</title>

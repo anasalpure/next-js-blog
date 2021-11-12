@@ -1,8 +1,8 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import Image from 'next/image'
-import Footer from '../components/Footer'
-import SEO from '../components/SEO'
+import Head from 'next/head';
+import Link from 'next/link';
+import Image from 'next/image';
+import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 export default function Home() {
   return (
@@ -21,12 +21,12 @@ export default function Home() {
             <a>
               Blog
             </a>
-					</Link>
+          </Link>
         </h1>
 
       </main>
 
       <Footer/>
     </div>
-  )
+  );
 }
