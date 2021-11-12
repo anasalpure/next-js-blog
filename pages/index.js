@@ -16,7 +16,7 @@ export default function Home() {
 
       <main className="main">
         <h1 className="title">
-          Go to 
+          Go to  
           <Link href="/blog/page/0">
             <a>
               Blog

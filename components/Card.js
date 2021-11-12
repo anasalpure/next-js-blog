@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import styles from '../styles/Blog.module.css'
 
-const Card = ({ title, description, href }) => (
+const Card = ({ title, description, clapsCount, commentsCount, href }) => (
 
   <Link href={href}>
       <a className={styles.card} >
@@ -9,6 +9,10 @@ const Card = ({ title, description, href }) => (
         <p>
           {description}
         </p>
+        <div>
+        claps &hearts; : {clapsCount} <br/>
+        comments : {commentsCount}
+        </div>
       </a>
   </Link>
 
