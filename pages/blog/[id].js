@@ -1,13 +1,18 @@
 import React from 'react';
+import ErrorPage from 'next/error';
+import { useRouter } from 'next/router';
 import { fetchAPI } from '../../lib/api';
 import Comments from '../../components/comments';
 import Footer from '../../components/Footer';
 import SEO from '../../components/seo';
 
 function Post({currentPost,comments}) {
-
-
+  const router = useRouter()
   const paragraphs = currentPost.data.content.blocks.filter((block)=>block.type == 'paragraph');
+  
+  if (!router.isFallback && !currentPost.data?.id) {
+    return <ErrorPage statusCode={404} />
+  }
 
   return (
     <div className="container">
@@ -59,6 +64,7 @@ export async function getStaticPaths() {
 export const getStaticProps = async ({params}) => {
   const ArticleId = parseInt(params ? params.id : 0);
 
+  //we can use "Useeffect" didMount to load comments
   const [currentPost, comments] = await Promise.all([
     fetchAPI(`/article/${ArticleId}`),
     fetchAPI(`/article/${ArticleId}/comments/0`,false)
@@ -78,3 +84,9 @@ export const getStaticProps = async ({params}) => {
     notFound: true
   };
 };
+
+
+// If you use getServerSideProps thin No Static Generation
+// serversideprops are running on a backend only. Useeffect hook for a clientside only.
+// export const getServerSideProps = async ({params}) => {
+// };
